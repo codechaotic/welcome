@@ -3,6 +3,7 @@ exports.config = {
   baseUrl: 'http://localhost',
   specs: ['test/spec.js'],
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'phantomjs',
+    'phantomjs.binary.path': require('phantomjs').path,
   }
 }
