@@ -1,9 +1,4 @@
-var gulp = require('gulp')
+global.config = require('./config/gulp.config')
 
-gulp.task('build', function() {
-  console.log('building')
-})
-
-gulp.task('test', function() {
-  console.log('testing')
-})
+var require_dir = require('require-dir')
+require_dir('./tasks/')   // Load tasks
