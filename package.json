@@ -13,7 +13,7 @@
     "url": "https://github.com/codechaotic/welcome/issues"
   },
   "homepage": "https://github.com/codechaotic/welcome#readme",
-  "devDependencies": {
+  "dependencies": {
     "gulp": "^3.9.0",
     "require-dir": "^0.3.0"
   }
