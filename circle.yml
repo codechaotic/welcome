@@ -6,11 +6,10 @@
       - mongodb
 
   dependencies:
-    override:
-      - npm install
+    post:
       - gulp build
       - cd dist && npm install
-      
+
   test:
     pre:
       - docker build -t $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
