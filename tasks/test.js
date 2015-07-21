@@ -2,7 +2,8 @@
   "use strict";
 
   var gulp = require('gulp'),
-      Q = require('q')
+      Q = require('q'),
+      http = require('http')
 
   gulp.task('test', test)
 
