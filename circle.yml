@@ -13,10 +13,7 @@
 
   test:
     pre:
-      - echo $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
-      - docker build -t $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
-      - >
-        docker run -dit -p 80:8080
-        $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+      - docker build -t $IMAGE .
+      - docker run -dit -p 80:8080 $IMAGE
     override:
       - gulp test
