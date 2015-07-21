@@ -10,13 +10,15 @@
     post:
       - gulp build
       - cd dist && npm install
+      - npm install -g protractor
 
   test:
     pre:
       - docker build -t $IMAGE .
       - docker run -dit -p 80:8080 $IMAGE
-      - sleep 1
-      - docker ps -a
-      - curl localhost
+      - webdriver-manager update
+      - webdriver-manager start:
+          background: true
     override:
-      - gulp test
+      - google-chrome --version
+      - protractor protractor.config.js
