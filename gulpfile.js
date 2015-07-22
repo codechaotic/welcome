@@ -1,4 +1,11 @@
 global.config = require('./gulp.config')
 
-var require_dir = require('require-dir')
-require_dir('./tasks/')   // Load tasks
+var gulp = require('gulp')
+
+loadTask('build', './tasks/build')
+loadTask('build-javascript', './tasks/build/javascript')
+loadTask('build-stylesheet', './tasks/build/stylesheet')
+
+function loadTask(task,path) {
+  gulp.task(task,require(path))
+}
