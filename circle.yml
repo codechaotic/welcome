@@ -8,6 +8,7 @@
 
   dependencies:
     post:
+      - cd semantic && npm install && gulp build
       - gulp build
       - cd dist && npm install
       - npm install -g protractor
