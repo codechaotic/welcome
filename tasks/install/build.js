@@ -7,7 +7,7 @@
 
   module.exports = function(callback) {
     gutil.log('Installing Build Dependencies')
-    spawn('npm',['install'],'semantic/').stopped()
+    spawn('npm',['install'],'dist/').stopped()
       .progress(gutil.log)
       .then(callback)
       .done()
