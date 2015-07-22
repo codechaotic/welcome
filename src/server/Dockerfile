@@ -1,6 +1,6 @@
 FROM codechaotic/node
 
-ADD dist/ /app
+ADD . /app
 WORKDIR /app
 
 CMD ["app.js"]
