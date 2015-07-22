@@ -5,6 +5,8 @@
     services:
       - mongodb
       - docker
+    environment:
+      IMAGE: $TUTUM_USER/$CIRCLE_PROJECT_REPONAME
 
   dependencies:
     post:
@@ -22,3 +24,15 @@
       - docker run -dit -p 80:8080 $IMAGE
     override:
       - protractor protractor.config.js
+
+  deployment:
+    production:
+      branch: master
+      commands:
+        - >
+          docker login \
+            -e $TUTUM_EMAIL \
+            -u $TUTUM_USER \
+            -p $TUTUM_PASSWORD \
+            tutum.co \
+          && docker push $IMAGE
