@@ -8,19 +8,17 @@
 
   dependencies:
     post:
-      - cd semantic && npm install && gulp build
       - bower install
       - gulp build
-      - cd dist && npm install
-      - npm install -g protractor
+      - gulp install
+      - docker build -t $IMAGE .
 
   test:
     pre:
-      - docker build -t $IMAGE .
-      - docker run -dit -p 80:8080 $IMAGE
+      - npm install -g protractor
       - webdriver-manager update
       - webdriver-manager start:
           background: true
+      - docker run -dit -p 80:8080 $IMAGE
     override:
-      - google-chrome --version
       - protractor protractor.config.js

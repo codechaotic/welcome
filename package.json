@@ -31,6 +31,7 @@
     "gulp-util": "^3.0.6",
     "main-bower-files": "^2.9.0",
     "phantomjs": "^1.9.17",
+    "q": "^1.4.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   }

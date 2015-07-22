@@ -10,8 +10,8 @@
     return gulp.src(src)
       .pipe(gulp.dest(dest))
       .on('end', function() {
-        gulp.start('build-javascript')
-        gulp.start('build-stylesheet')
+        gulp.start('build javascript')
+        gulp.start('build stylesheet')
       })
 
   }
