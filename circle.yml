@@ -34,5 +34,6 @@
             -e $TUTUM_EMAIL \
             -u $TUTUM_USER \
             -p $TUTUM_PASSWORD \
-            tutum.co \
-          && docker push $IMAGE
+            tutum.co
+        - docker tag $IMAGE tutum.co/$IMAGE
+        - docker push tutum.co/$IMAGE
