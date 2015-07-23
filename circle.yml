@@ -7,18 +7,19 @@
       - docker
     environment:
       IMAGE: $TUTUM_USER/$CIRCLE_PROJECT_REPONAME
+      PATH: ${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin
 
   dependencies:
     override:
       - npm install
       - bower install
+      - npm install -g protractor
 
   test:
     pre:
       - gulp build
       - cd dist/ && npm install
-      - docker build -t $IMAGE dist/
-      - npm install -g protractor
+      - docker build -t $IMAGE .
       - webdriver-manager update
       - webdriver-manager start:
           background: true
