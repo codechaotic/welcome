@@ -10,6 +10,15 @@
       PATH: ${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin
       PORT: 8080
 
+  checkout:
+    post:
+      - >
+        docker login \
+          -e ${TUTUM_EMAIL} \
+          -u ${TUTUM_USER} \
+          -p ${TUTUM_PASSWORD} \
+          tutum.co
+          
   dependencies:
     override:
       - npm install
@@ -30,11 +39,5 @@
     production:
       branch: master
       commands:
-        - >
-          docker login \
-            -e ${TUTUM_EMAIL} \
-            -u ${TUTUM_USER} \
-            -p ${TUTUM_PASSWORD} \
-            tutum.co
         - docker tag ${IMAGE} tutum.co/${IMAGE}
         - docker push tutum.co/${IMAGE}

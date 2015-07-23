@@ -1,4 +1,4 @@
-FROM codechaotic/node
+FROM tutum.co/codechaotic/node
 
 ADD dist/ /app
 WORKDIR /app
