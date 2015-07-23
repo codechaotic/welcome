@@ -5,4 +5,12 @@ tasks/
 src/
 tasks/
 test/
-./
+.dockerignore
+.gitignore
+Dockerfile
+bower.json
+circle.yml
+gulpfile.js
+package.json
+protractor.config.js
+stack.yml
