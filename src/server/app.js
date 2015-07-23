@@ -1,8 +1,12 @@
 (function() {
-  var config = require('./config'),
-      express = require('express'),
-      app = express()
-  console.log('running on %s', config.port)
-  app.use(express.static(config.public_dir))
+  var koa             = require('koa'),
+      route           = require('koa-route'),
+      serve           = require('koa-static'),
+      body            = require('koa-body'),
+      app             = koa(),
+
+      config          = require('./config')
+
+  app.use(serve(config.public_dir))
   app.listen(config.port)
 })();
