@@ -8,6 +8,7 @@
     environment:
       IMAGE: $TUTUM_USER/$CIRCLE_PROJECT_REPONAME
       PATH: ${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin
+      PORT: 8080
 
   dependencies:
     override:
@@ -17,11 +18,11 @@
   test:
     pre:
       - gulp build
-      - docker build -t $IMAGE .
+      - docker build -t ${IMAGE} .
       - webdriver-manager update
       - webdriver-manager start:
           background: true
-      - docker run -dit -p 80:8080 $IMAGE
+      - docker run -dit -p 80:${PORT} ${IMAGE}
     override:
       - protractor protractor.config.js
 
@@ -31,9 +32,9 @@
       commands:
         - >
           docker login \
-            -e $TUTUM_EMAIL \
-            -u $TUTUM_USER \
-            -p $TUTUM_PASSWORD \
+            -e ${TUTUM_EMAIL} \
+            -u ${TUTUM_USER} \
+            -p ${TUTUM_PASSWORD} \
             tutum.co
-        - docker tag $IMAGE tutum.co/$IMAGE
-        - docker push tutum.co/$IMAGE
+        - docker tag ${IMAGE} tutum.co/${IMAGE}
+        - docker push tutum.co/${IMAGE}
