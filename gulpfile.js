@@ -1,15 +1,20 @@
-global.config = require('./gulp.config')
+var gulp              = require('gulp'),
 
-var gulp = require('gulp')
+    build             = require('./tasks/build'),
+    buildSemanticCSS  = require('./tasks/build/semantic-css'),
+    buildSemanticJS   = require('./tasks/build/semantic-js'),
+    buildClient       = require('./tasks/build/client'),
+    buildServer       = require('./tasks/build/server'),
+    buildBowerFiles   = require('./tasks/build/bowerfiles')
 
-loadTask('build', './tasks/build')
-loadTask('build javascript', './tasks/build/javascript')
-loadTask('build stylesheet', './tasks/build/stylesheet')
+gulp.task('build', build)
+gulp.task('build-semantic-css', buildSemanticCSS)
+gulp.task('build-semantic-js',buildSemanticJS)
+gulp.task('build-client', buildClient)
+gulp.task('build-server', buildServer)
+gulp.task('build-bowerfiles', buildBowerFiles)
 
-loadTask('install', './tasks/install')
-loadTask('install semantic', './tasks/install/semantic')
-loadTask('install build', './tasks/install/build')
-
-function loadTask(task,path) {
-  gulp.task(task,require(path))
-}
+gulp.task('build-semantic', [
+  'build-semantic-css',
+  'build-semantic-js'
+])

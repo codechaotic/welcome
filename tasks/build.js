@@ -4,16 +4,11 @@
   var gulp = require('gulp')
 
   module.exports = function(callback) {
-    var src = './src/server/**/*',
-        dest = './dist'
-
-    return gulp.src(src)
-      .pipe(gulp.dest(dest))
-      .on('end', function() {
-        gulp.start('build javascript')
-        gulp.start('build stylesheet')
-      })
-
+    gulp.start('build-semantic-css')
+    gulp.start('build-semantic-js')
+    gulp.start('build-client')
+    gulp.start('build-server')
+    gulp.start('build-bowerfiles')
   }
 
-})();
+})()
