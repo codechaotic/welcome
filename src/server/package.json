@@ -7,7 +7,10 @@
     "koa": "^0.21.0",
     "koa-body": "^1.2.1",
     "koa-router": "^5.1.2",
-    "koa-static": "^1.4.9"
+    "koa-static": "^1.4.9",
+    "mongoose": "^4.0.8",
+    "q": "^1.4.1",
+    "zeninjector": "^0.1.12"
   },
   "scripts": {
     "prestart": "npm install --production",

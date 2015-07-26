@@ -1,16 +1,28 @@
 (function() {
-  var koa               = require('koa'),
-      serve             = require('koa-static'),
-      app               = koa(),
 
-      //config
-      config            = require('./config'),
+  var Zeninjector       = require('zeninjector'),
+      zen               = new Zeninjector(),
+      modules = [
+        'config.js',
+        'inject.js',
+        'services/**/*.js',
+        'models/**/*.js',
+        'routers/**/*.js'
+      ]
 
-      //routers
-      api               = require('./routers/api')
+  zen.scan(modules).then(function() {
+    zen.inject([ 'config', 'api_router', run ])
+  })
 
-  app.use(serve(config.public_dir))
-  app.use(api.routes())
+  function run(config,api_router) {
+    var serve           = require('koa-static'),
+        koa             = require('koa'),
+        app             = koa()
 
-  app.listen(config.port)
-})();
+    app.use(serve(config.public_dir))
+    app.use(api_router)
+
+    app.listen(config.port)
+  }
+
+})()
