@@ -18,7 +18,7 @@
           -u ${TUTUM_USER} \
           -p ${TUTUM_PASSWORD} \
           tutum.co
-          
+
   dependencies:
     override:
       - npm install
@@ -31,8 +31,10 @@
       - webdriver-manager update
       - webdriver-manager start:
           background: true
-      - docker run -dit -p 80:${PORT} ${IMAGE}
+      - docker run -dit --net="host" -p 80:${PORT} ${IMAGE}
+
     override:
+      - mongo --eval="JSON.stringify(db.stats(),null,4)"
       - protractor protractor.config.js
 
   deployment:
