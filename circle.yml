@@ -28,9 +28,8 @@
       - webdriver-manager update
       - webdriver-manager start:
           background: true
-      - docker run --name db -d dockerslim/mongo:mongod --smallfiles
-      - ip=$(docker inspect -f '{{.NetworkSettings.IPAddress}}' db)
-      - docker run --name app --env MONGO_URL=mongodb://$ip:27017/test -p 80:8080 -d welcome
+      - docker run --name db -d dockerslim/mongo:mongod mongod --smallfiles
+      - docker run --name app --env MONGO_URL=mongodb://$(docker inspect -f '{{.NetworkSettings.IPAddress}}' db):27017/test -p 80:8080 -d welcome
     override:
       - protractor protractor.config.js
 
