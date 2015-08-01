@@ -1,7 +1,0 @@
----
-  app:
-
-  mongod:
-    image: tutum/mongodb
-    ports:
-      - "27017:27017"
