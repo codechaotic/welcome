@@ -1,7 +1,8 @@
 (function() {
 
+  var mongoose = require('mongoose')
   //@autoinject
-  module.exports.comment_model = function(mongoose) {
+  module.exports.comment_model = function(db) {
     var comment_schema = new mongoose.Schema({
           content: String,
           updated: { type: Date, default: Date.now }

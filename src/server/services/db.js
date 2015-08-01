@@ -5,7 +5,7 @@
       connect           = Q.nbind(mongoose.connect,mongoose)
 
   //@autoinject
-  module.exports.mongoose = function(config) {
+  module.exports.db = function(config) {
     mongoose.connection
       .on('connected', onConnected)
       .on('error', onError)
