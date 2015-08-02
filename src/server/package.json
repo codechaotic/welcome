@@ -13,7 +13,7 @@
     "zeninjector": "^0.1.12"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "node --harmony app.js"
   },
   "engines": {
     "node": "0.12.x"
