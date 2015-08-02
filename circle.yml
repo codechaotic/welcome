@@ -6,7 +6,8 @@
       - mongodb
     environment:
       PATH: ${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin
-      MONGO_URL: mongodb://localhost:27017/test
+      TEST_MONGO_URL: mongodb://localhost:27017/test
+      TEST_PORT: 80
       MODULUS_PROJECT: welcome
       MODULUS_TYPE: "Node.js"
       MODULUS_SIZE: 192
@@ -24,6 +25,9 @@
           pwd: ${BUILD_DIR}
       - npm start:
           pwd: ${BUILD_DIR}
+          environment:
+            MONGO_URL: ${TEST_MONGO_URL}
+            PORT: ${TEST_PORT}
       - webdriver-manager update
       - webdriver-manager start:
           background: true
