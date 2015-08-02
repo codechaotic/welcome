@@ -7,7 +7,7 @@
     environment:
       PATH: ${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin
       TEST_MONGO_URL: mongodb://localhost:27017/test
-      TEST_PORT: 80
+      TEST_PORT: 8080
       MODULUS_PROJECT: welcome
       MODULUS_TYPE: "Node.js"
       MODULUS_SIZE: 192
@@ -33,7 +33,7 @@
       - webdriver-manager start:
           background: true
     override:
-      - protractor protractor.config.js
+      - protractor protractor.config.js --baseURL=http://localhost:${TEST_PORT}
 
   deployment:
     production:
