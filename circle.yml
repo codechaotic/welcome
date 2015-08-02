@@ -7,7 +7,7 @@
     environment:
       PATH: ${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin
       TEST_MONGO_URL: mongodb://localhost:27017/test
-      TEST_PORT: 8080
+      TEST_PORT: 3000
       MODULUS_PROJECT: welcome
       MODULUS_TYPE: "Node.js"
       MODULUS_SIZE: 192
@@ -23,7 +23,7 @@
       - gulp build
       - npm install:
           pwd: ${BUILD_DIR}
-      - npm start 2>&1 | tee ${CIRCLE_ARTIFACTS}/app.log:
+      - npm start:
           pwd: ${BUILD_DIR}
           environment:
             MONGO_URL: ${TEST_MONGO_URL}
@@ -33,7 +33,9 @@
       - webdriver-manager start:
           background: true
     override:
-      - protractor protractor.config.js --baseURL=http://localhost:${TEST_PORT}
+      - protractor protractor.config.js:
+          environment:
+            PORT: ${TEST_PORT}
 
   deployment:
     production:
