@@ -1,7 +1,7 @@
 ---
   machine:
     node:
-      version: 0.12.0
+      version: 0.12.6
     services:
       - mongodb
     environment:
@@ -23,11 +23,12 @@
       - gulp build
       - npm install:
           pwd: ${BUILD_DIR}
-      - npm start:
+      - npm start 2>&1 | tee ${CIRCLE_ARTIFACTS}/app.log:
           pwd: ${BUILD_DIR}
           environment:
             MONGO_URL: ${TEST_MONGO_URL}
             PORT: ${TEST_PORT}
+          background: true
       - webdriver-manager update
       - webdriver-manager start:
           background: true
