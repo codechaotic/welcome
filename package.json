@@ -32,5 +32,8 @@
     "main-bower-files": "^2.9.0",
     "phantomjs": "^1.9.17",
     "protractor": "^2.1.0"
+  },
+  "engines": {
+    "node": "0.12.x"
   }
 }
