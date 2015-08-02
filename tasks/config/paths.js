@@ -13,7 +13,7 @@
     server: 'src/server/'
   }
   exports.build = {
-    base: 'dist/',
+    base: process.env.BUILD_DIR || 'dist/',
     css: 'dist/public/css',
     js: 'dist/public/js'
   }

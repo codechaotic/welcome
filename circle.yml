@@ -3,18 +3,14 @@
     node:
       version: 0.10.33
     services:
-      - docker
+      - mongodb
     environment:
       PATH: ${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin
-
-  checkout:
-    post:
-      - >
-        docker login \
-          -e ${TUTUM_EMAIL} \
-          -u ${TUTUM_USER} \
-          -p ${TUTUM_PASSWORD} \
-          tutum.co
+      MONGO_URL: mongodb://localhost:27017/test
+      MODULUS_PROJECT: welcome
+      MODULUS_TYPE: "Node.js"
+      MODULUS_SIZE: 192
+      BUILD_DIR: dist/
 
   dependencies:
     override:
@@ -24,12 +20,13 @@
   test:
     pre:
       - gulp build
-      - docker build -t welcome .
+      - npm install:
+          pwd: ${BUILD_DIR}
+      - npm start:
+          pwd: ${BUILD_DIR}
       - webdriver-manager update
       - webdriver-manager start:
           background: true
-      - docker run --name db -d dockerslim/mongo:mongod mongod --smallfiles
-      - docker run --name app --env MONGO_URL=mongodb://$(docker inspect -f '{{.NetworkSettings.IPAddress}}' db):27017/test -p 80:8080 -d welcome
     override:
       - protractor protractor.config.js
 
@@ -37,5 +34,4 @@
     production:
       branch: master
       commands:
-        - docker tag welcome tutum.co/$TUTUM_USER/$CIRCLE_PROJECT_REPONAME
-        - docker push tutum.co/$TUTUM_USER/$CIRCLE_PROJECT_REPONAME
+        - ./deploy.sh

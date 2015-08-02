@@ -13,9 +13,7 @@
     "zeninjector": "^0.1.12"
   },
   "scripts": {
-    "prestart": "npm install --production",
-    "start": "node app.js",
-    "test": "gulp test"
+    "start": "node app.js"
   },
   "engines": {
     "node": "0.12.x"
