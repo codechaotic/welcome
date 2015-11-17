@@ -5,38 +5,28 @@
 <link rel="stylesheet" type="text/css" href="/css/semantic.css" />
 <script type="text/javascript" src="/js/modernizr.js"></script>
 </head>
-<body>
+<body ng-controller="PageController as page">
 
   <div class="ui centered grid container">
     <div class="six wide column">
-
       <div class="ui hidden section divider"></div>
-
       <h1 class="ui center aligned dividing header">Welcome!</h1>
 
-      <form class="ui form">
-        <div class="two fields">
+      <div ng-controller="CommentController as commentCtrl">
+        <blockquote>
+          {{commentCtrl.comment.body}}
+        </blockquote>
+        <form name="add-comment" class="ui form">
           <div class="field">
-            <label>First Name</label>
-            <input name="first-name" placeholder="First Name" type="text">
+            <label>Comment</label>
+            <input ng-model="commentCtrl.comment.body" placeholder="Comment" type="text">
           </div>
-          <div class="field">
-            <label>Last Name</label>
-            <input name="last-name" placeholder="Last Name" type="text">
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui checkbox">
-            <input class="hidden" tabindex="0" type="checkbox">
-            <label>I agree to the Terms and Conditions</label>
-          </div>
-        </div>
-        <button class="ui primary button" type="submit">Submit</button>
-      </form>
+          <button class="ui primary button" ng-click="comment.add()">Add</button>
+        </form>
+      </div>
 
     </div>
   </div>
-
 
   <script type="text/javascript" src="/js/angular.js"></script>
   <script type="text/javascript" src="/js/angular-route.js"></script>
